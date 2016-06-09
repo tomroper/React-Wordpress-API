@@ -7,7 +7,7 @@ export default class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      title : ''
+      data : []
     }
   }
 
@@ -20,17 +20,27 @@ export default class Home extends React.Component {
     jQuery.ajax({
       method: 'GET',
       url: 'http://fourth.academy.red/wp-json/wp/v2/posts',
-      success: (data) => {this.setState({ title: data[0].title.rendered })}
+      success: data => this.setState({
+        data: data
+        })
     })
   }
 
 
 
   render() {
+    const {data} = this.state;
+console.log(data[0]);
+  if (data.length > 0 ){
     return (
-      <h1> 
-        {this.state.title}
-      </h1>
-    )
+      <div>
+        {data.map((d, i) => <p key={i}>{d.title.rendered}</p>)}
+      </div>);
+
+  } else {
+    return <p>no data - loading</p>;
+  }
+
+
   } //render close
 } //App close
