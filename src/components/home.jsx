@@ -38,9 +38,10 @@ export default class Home extends React.Component {
     return (
       <div>
         <h1 className="page_title">The Final Frontier...</h1>
-        <h2>Content for the page is sourced from fourth.academy.red, a really great blog about heading to space</h2>
-        <h3>Powered with React & Wordpress for your viewing pleasure</h3>
+        <h2>Content in this page is from <a href="http://fourth.academy.red/" target="_blank">fourth.academy.red</a>, a really great blog about heading to space</h2>
         {data.map((d, i) => <div key={i}><h1 className="post_title">{d.title.rendered}</h1><p>{this._stripTags(d.content.rendered)}</p></div>)}
+        <h3>Powered with React & Wordpress for your viewing pleasure</h3>
+        <h3>Made by Tom Roper</h3>
       </div>);
 
   } else {
