@@ -7,7 +7,7 @@ export default class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data : []
+      data : [],
     }
   }
 
@@ -17,28 +17,32 @@ export default class Home extends React.Component {
 
 
   _fetchData() {
-    jQuery.ajax({
-      method: 'GET',
-      url: 'http://fourth.academy.red/wp-json/wp/v2/posts',
-      success: data => this.setState({
-        data: data
-        })
-    })
+      jQuery.ajax({
+        method: 'GET',
+        url: 'http://fourth.academy.red/wp-json/wp/v2/posts',
+        success: data => this.setState({
+          data: data
+          })
+      })
+
   }
 
-
+  _stripTags(input){
+    input = input.replace(/(<([^>]+)>)/ig,"");
+    return input
+  }
 
   render() {
     const {data} = this.state;
-console.log(data[0]);
-  if (data.length > 0 ){
+    if (data.length > 0 ){
     return (
       <div>
-        {data.map((d, i) => <p key={i}>{d.title.rendered}</p>)}
+        <h1>React & Wordpress</h1>
+        {data.map((d, i) => <div key={i}><h1>{d.title.rendered}</h1><p>{this._stripTags(d.content.rendered)}</p></div>)}
       </div>);
 
   } else {
-    return <p>no data - loading</p>;
+      return <p>no data - loading</p>;
   }
 
 
