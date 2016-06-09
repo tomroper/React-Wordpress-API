@@ -7,7 +7,7 @@ export default class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data : []
+      title : ''
     }
   }
 
@@ -15,15 +15,12 @@ export default class Home extends React.Component {
     this._fetchData();
   }
 
-  componentDidMount(){
-    console.log(this.state.data);
-  }
 
   _fetchData() {
     jQuery.ajax({
       method: 'GET',
       url: 'http://fourth.academy.red/wp-json/wp/v2/posts',
-      success: (data) => {this.setState({ data: data })}
+      success: (data) => {this.setState({ title: data[0].title.rendered })}
     })
   }
 
@@ -31,7 +28,9 @@ export default class Home extends React.Component {
 
   render() {
     return (
-      <h1> This React.js App is pulling from an external API</h1>
+      <h1> 
+        {this.state.title}
+      </h1>
     )
   } //render close
 } //App close
