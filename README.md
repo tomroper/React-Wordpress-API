@@ -15,5 +15,4 @@ In the render, I pass the data.content object through a function that strips the
 
 
 Bugs;
-- HTML in content eg &amp is still being displayed as HTML and not part of the string
 - Needs to be run on localhost:3000 for the remote API to allow access 
